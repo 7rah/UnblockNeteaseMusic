@@ -25,7 +25,7 @@ var localhost = map[string]int{}
 
 func InitProxy() {
 	fmt.Println("-------------------Init Proxy-------------------")
-	address := "127.0.0.1:"
+	address := "0.0.0.0:"
 	addrs, err := net.InterfaceAddrs()
 	if err != nil {
 		panic(err)
