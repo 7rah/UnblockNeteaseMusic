@@ -3,9 +3,9 @@ package kuwo
 import (
 	"encoding/base64"
 	"fmt"
-	"github.com/cnsilvan/UnblockNeteaseMusic/common"
-	"github.com/cnsilvan/UnblockNeteaseMusic/network"
-	"github.com/cnsilvan/UnblockNeteaseMusic/utils"
+	"github.com/7rah/UnblockNeteaseMusic/common"
+	"github.com/7rah/UnblockNeteaseMusic/network"
+	"github.com/7rah/UnblockNeteaseMusic/utils"
 	"net/http"
 	"net/url"
 	"regexp"

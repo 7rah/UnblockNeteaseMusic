@@ -3,9 +3,9 @@ package config
 import (
 	"flag"
 	"fmt"
-	"github.com/cnsilvan/UnblockNeteaseMusic/common"
-	"github.com/cnsilvan/UnblockNeteaseMusic/utils"
-	"github.com/cnsilvan/UnblockNeteaseMusic/version"
+	"github.com/7rah/UnblockNeteaseMusic/common"
+	"github.com/7rah/UnblockNeteaseMusic/utils"
+	"github.com/7rah/UnblockNeteaseMusic/version"
 	"os"
 	"path/filepath"
 	"strings"

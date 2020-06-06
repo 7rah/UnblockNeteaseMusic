@@ -32,5 +32,5 @@ func AppVersion() string {
 	##       ##   ##     ## ##     ##  ##       ##  ##        ##      ##      ##      ##
 	## ## ## ##  ##      ####      ##  ## ## ## ##   ## ## ##      ## ## ##    ## ## ##
 		
-                 %s`+"  by cnsilvan（https://github.com/cnsilvan/UnblockNeteaseMusic） \n", Version)
+                 %s`+"  by 7rah（https://github.com/7rah/UnblockNeteaseMusic） \n", Version)
 }
