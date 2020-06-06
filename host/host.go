@@ -3,14 +3,15 @@ package host
 import (
 	"bufio"
 	"fmt"
-	"github.com/7rah/UnblockNeteaseMusic/common"
-	"github.com/7rah/UnblockNeteaseMusic/config"
 	"io"
 	"net"
 	"os"
 	"path/filepath"
 	"runtime"
 	"strings"
+
+	"github.com/7rah/UnblockNeteaseMusic/common"
+	"github.com/7rah/UnblockNeteaseMusic/config"
 )
 
 func getWinSystemDir() string {
@@ -220,7 +221,7 @@ func getHostsPath() (string, error) {
 	return hostsPath, nil
 }
 func RestoreHosts() error {
-	if *config.Mode == 1 {
+	if config.Mode == 1 {
 		hostsPath, err := getHostsPath()
 		if err == nil {
 			err := restoreHost(hostsPath)
@@ -231,7 +232,7 @@ func RestoreHosts() error {
 }
 func InitHosts() error {
 	fmt.Println("-------------------Init Host-------------------")
-	if *config.Mode == 1 { //hosts mode
+	if config.Mode == 1 { //hosts mode
 		hostsPath, err := getHostsPath()
 		if err == nil {
 			containsProxyDomain := false

@@ -7,18 +7,19 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
-	"github.com/7rah/UnblockNeteaseMusic/common"
-	"github.com/7rah/UnblockNeteaseMusic/config"
-	"github.com/7rah/UnblockNeteaseMusic/network"
-	"github.com/7rah/UnblockNeteaseMusic/processor/crypto"
-	"github.com/7rah/UnblockNeteaseMusic/provider"
-	"github.com/7rah/UnblockNeteaseMusic/utils"
 	"io"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"regexp"
 	"strings"
+
+	"github.com/7rah/UnblockNeteaseMusic/common"
+	"github.com/7rah/UnblockNeteaseMusic/config"
+	"github.com/7rah/UnblockNeteaseMusic/network"
+	"github.com/7rah/UnblockNeteaseMusic/processor/crypto"
+	"github.com/7rah/UnblockNeteaseMusic/provider"
+	"github.com/7rah/UnblockNeteaseMusic/utils"
 )
 
 var (
@@ -392,7 +393,7 @@ func searchGreySong(data common.MapType, netease *Netease) bool {
 				//fmt.Println()
 				//data["url"] = uri.Scheme + "://" + uri.Host + uri.EscapedPath()
 				//data["url"] = uri.String()
-				if *config.EndPoint {
+				if config.EndPoint {
 					data["url"] = "http://music.163.com/unblockmusic/" + uri.String()
 				} else {
 					data["url"] = uri.String()

@@ -4,11 +4,6 @@ import (
 	"bytes"
 	"crypto/tls"
 	"fmt"
-	"github.com/7rah/UnblockNeteaseMusic/common"
-	"github.com/7rah/UnblockNeteaseMusic/config"
-	"github.com/7rah/UnblockNeteaseMusic/network"
-	"github.com/7rah/UnblockNeteaseMusic/processor"
-	"github.com/7rah/UnblockNeteaseMusic/version"
 	"io"
 	"net"
 	"net/http"
@@ -16,6 +11,12 @@ import (
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/7rah/UnblockNeteaseMusic/common"
+	"github.com/7rah/UnblockNeteaseMusic/config"
+	"github.com/7rah/UnblockNeteaseMusic/network"
+	"github.com/7rah/UnblockNeteaseMusic/processor"
+	"github.com/7rah/UnblockNeteaseMusic/version"
 )
 
 type HttpHandler struct{}
@@ -24,7 +25,7 @@ var localhost = map[string]int{}
 
 func InitProxy() {
 	fmt.Println("-------------------Init Proxy-------------------")
-	address := "0.0.0.0:"
+	address := "127.0.0.1:"
 	addrs, err := net.InterfaceAddrs()
 	if err != nil {
 		panic(err)
@@ -45,8 +46,8 @@ func InitProxy() {
 	}
 	fmt.Println("Http Proxy:")
 	fmt.Println(strings.Join(localhostKey, " , "))
-	go startTlsServer(address+strconv.Itoa(*config.TLSPort), *config.CertFile, *config.KeyFile, &HttpHandler{})
-	go startServer(address+strconv.Itoa(*config.Port), &HttpHandler{})
+	//go startTlsServer(address+strconv.Itoa(config.TLSPort), config.CertFile, config.KeyFile, &HttpHandler{})
+	startServer(address+strconv.Itoa(config.Port), &HttpHandler{})
 }
 func (h *HttpHandler) ServeHTTP(resp http.ResponseWriter, request *http.Request) {
 	requestURI := request.RequestURI
@@ -134,7 +135,7 @@ func (h *HttpHandler) ServeHTTP(resp http.ResponseWriter, request *http.Request)
 			if request.Method == http.MethodConnect {
 				proxyConnectLocalhost(resp, request)
 			} else {
-				if *config.Mode != 1 {
+				if config.Mode != 1 {
 					proxyDomain = hostStr
 				} else if hostIp, ok := common.HostDomain[hostStr]; ok {
 					proxyDomain = hostIp
@@ -249,11 +250,11 @@ func proxyConnectLocalhost(rw http.ResponseWriter, req *http.Request) {
 	localUrl := "localhost:"
 	var server net.Conn
 	port := req.URL.Port()
-	if port == "80" || port == strconv.Itoa(*config.Port) {
-		localUrl = localUrl + strconv.Itoa(*config.Port)
+	if port == "80" || port == strconv.Itoa(config.Port) {
+		localUrl = localUrl + strconv.Itoa(config.Port)
 		server, err = net.DialTimeout("tcp", localUrl, 15*time.Second)
-	} else if port == "443" || port == strconv.Itoa(*config.TLSPort) {
-		localUrl = localUrl + strconv.Itoa(*config.TLSPort)
+	} else if port == "443" || port == strconv.Itoa(config.TLSPort) {
+		localUrl = localUrl + strconv.Itoa(config.TLSPort)
 		server, err = tls.Dial("tcp", localUrl, &tls.Config{InsecureSkipVerify: true})
 	}
 	if err != nil {
